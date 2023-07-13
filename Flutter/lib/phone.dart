@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heartdisease_pred/otp.dart';
+import 'package:project_2/otp.dart';
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
 
@@ -20,8 +20,8 @@ class _MyPhoneState extends State<MyPhone> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.lightGreen,
-        title: Text('Phone Number'),
+        backgroundColor:Colors.black38,
+        title: Text('Phone OTP'),
       ),
       body: Container(
         margin:EdgeInsets.only(left:25,right: 25),
@@ -30,7 +30,7 @@ class _MyPhoneState extends State<MyPhone> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/heart1.jpg',width:120,height: 120),
+              Image.asset('assets/photp.png',width:150,height: 150),
               SizedBox(
                 height: 25,
               ),
@@ -43,11 +43,11 @@ class _MyPhoneState extends State<MyPhone> {
               ),
               Text("Enter Phone Number to register",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -103,15 +103,23 @@ class _MyPhoneState extends State<MyPhone> {
                     codeAutoRetrievalTimeout: (String verificationId) {},
                   );
                 }, child: Text("Send OTP"),style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.lightBlueAccent,
                     textStyle: TextStyle(
                       fontWeight:FontWeight.bold,
-                      fontSize: 20,
+                      fontSize:25,
                       color: Colors.black,
                     )
                 ),
                 ),
               ),
+              SizedBox(
+                height:80,
+              ),
+              TextButton(style: TextButton.styleFrom(backgroundColor: Colors.black38),
+                  onPressed:(){
+                    Navigator.pushNamed(context, "choice");
+                  },
+                  child: const Text("Login Choice", style: TextStyle(color: Colors.white),)),
             ],
           ),
         ),

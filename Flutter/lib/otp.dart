@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:heartdisease_pred/phone.dart';
+import 'package:project_2/phone.dart';
+import 'package:project_2/appchoice.dart';
 class MyOtp extends StatefulWidget {
   const MyOtp({Key? key}) : super(key: key);
 
@@ -37,8 +38,8 @@ class _MyOtpState extends State<MyOtp> {
     var code="";
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.lightGreen,
-        title: Text('OTP Verification'),
+        backgroundColor:Colors.black38,
+        title: Text('Phone OTP'),
       ),
       body: Container(
         margin:EdgeInsets.only(left:25,right: 25),
@@ -47,7 +48,7 @@ class _MyOtpState extends State<MyOtp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/heart1.jpg',width:120,height: 120),
+              Image.asset('assets/photp.png',width:150,height: 150),
               SizedBox(
                 height: 25,
               ),
@@ -60,11 +61,11 @@ class _MyOtpState extends State<MyOtp> {
               ),
               Text("Enter OTP",
                 style: TextStyle(
-                  fontSize: 23,
+                  fontSize: 25,
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Pinput(
                 length: 6,
@@ -86,13 +87,13 @@ class _MyOtpState extends State<MyOtp> {
 
                     // Sign the user in (or link) with the credential
                     await auth.signInWithCredential(credential);
-                    Navigator.pushNamedAndRemoveUntil(context, 'loggedin',(route) => false);
+                    Navigator.pushNamedAndRemoveUntil(context, 'appchoice',(route) => false);
                   }
                   catch(e){
                     print("wrong otp");
                   }
                 }, child: Text("Verify"),style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.lightBlueAccent,
                     textStyle: TextStyle(
                       fontWeight:FontWeight.bold,
                       fontSize: 25,
@@ -100,6 +101,9 @@ class _MyOtpState extends State<MyOtp> {
                     )
                 ),
                 ),
+              ),
+              SizedBox(
+                height:50,
               ),
               TextButton(onPressed: (){
                 Navigator.pushNamed(context, 'phone',arguments: (route) => false);

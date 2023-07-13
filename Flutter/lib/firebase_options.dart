@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC531Vs9Bqq7ww0kZoJLqMnWcQiuGeUerE',
-    appId: '1:356946228565:android:2b3d6a94ee01eded1c6bdc',
-    messagingSenderId: '356946228565',
-    projectId: 'phone-otp-1ff2c',
-    storageBucket: 'phone-otp-1ff2c.appspot.com',
+    apiKey: 'AIzaSyCLbvlasAsXhfG4oaXMwr_2M4TPeJXnU-Q',
+    appId: '1:250832379656:android:97a6468f7f8bb4f5ed96bd',
+    messagingSenderId: '250832379656',
+    projectId: 'flutter-login-page-dbeda',
+    storageBucket: 'flutter-login-page-dbeda.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6b4LXbly3rem3o9uRtljuW3AkGs8tn9w',
-    appId: '1:356946228565:ios:0ea4e5bddab575ef1c6bdc',
-    messagingSenderId: '356946228565',
-    projectId: 'phone-otp-1ff2c',
-    storageBucket: 'phone-otp-1ff2c.appspot.com',
-    androidClientId: '356946228565-99p1ikhg3ai5bqd3mklf7toubva1flup.apps.googleusercontent.com',
-    iosClientId: '356946228565-6tjl4tt9kc8qknjch33i27vmnm3ppkev.apps.googleusercontent.com',
-    iosBundleId: 'com.example.heartdiseasePred',
+    apiKey: 'AIzaSyC25YwoDKkI39wnG4BnpXC9--4hlu6QrxI',
+    appId: '1:250832379656:ios:6ea54e540e7d1cd3ed96bd',
+    messagingSenderId: '250832379656',
+    projectId: 'flutter-login-page-dbeda',
+    storageBucket: 'flutter-login-page-dbeda.appspot.com',
+    iosClientId: '250832379656-90t2iaesamsc698iq1rsujskr0kp8icv.apps.googleusercontent.com',
+    iosBundleId: 'com.example.project2',
   );
 }

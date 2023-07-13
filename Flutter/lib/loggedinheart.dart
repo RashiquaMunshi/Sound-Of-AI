@@ -1,121 +1,17 @@
-// import "dart:io";
-// import 'package:http/http.dart' as http;
-// import 'package:file_picker/file_picker.dart';
-// import 'package:flutter/material.dart';
-//
-// class LoggedIn extends StatefulWidget {
-//   const LoggedIn({Key? key}) : super(key: key);
-//
-//   @override
-//   State<LoggedIn> createState() => _LoggedInState();
-// }
-//
-// class _LoggedInState extends State<LoggedIn> {
-//   // FilePickerResult? result;
-//   // String? _fileName;
-//   // PlatformFile? pickedfile;
-//   // bool isLoading=false;
-//   // File? fileToDisplay;
-//   String? _filePath;
-//   String? predicted;
-//   String prediction='';
-//
-//   Future<void> uploadAudio(File audioFile) async {
-//     final url = 'http://10.0.2.2:5000/predict'; // Change this to your Flask back-end URL
-//     var request = await http.MultipartRequest('POST', Uri.parse(url));
-//     request.files.add(await http.MultipartFile.fromPath('audio', audioFile.path));
-//     var response = await request.send();
-//     var responseData = await response.stream.bytesToString();
-//     setState(() {
-//       prediction = responseData;
-//     });
-//     debugPrint(responseData);
-//   }
-//   Future<void> pickFile() async {
-//     FilePickerResult? result=await FilePicker.platform.pickFiles(
-//       type: FileType.any,
-//     );
-//
-//     if(result!=null){
-//       PlatformFile file=result.files.first;
-//       setState(() {
-//         _filePath=file.path;
-//       });
-//       // _fileName=result!.files.first.name;
-//       // pickedfile=result!.files.first;
-//       //fileToDisplay=File(pickedfile!.path.toString() as List<Object>);
-//       //print('File name $_fileName');
-//     }
-//   }
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: Text('Predictor'),
-//         ),
-//         body: Center(
-//           child:SingleChildScrollView(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children:<Widget>[
-//               ElevatedButton(
-//                 child: Text('Pick File'),
-//                 style: ElevatedButton.styleFrom(
-//                     backgroundColor: Colors.green,
-//                     shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(10)
-//                     )
-//                 ), onPressed: pickFile,
-//               ),
-//               SizedBox(height: 10,),
-//               _filePath != null
-//                   ? Text('Selected file: $_filePath')
-//                   : Text('No file selected'),
-//               SizedBox(height: 10,),
-//               ElevatedButton(onPressed: ()async{
-//                 await uploadAudio(File(_filePath??""));
-//               }, child: Text('Predict'),
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.green,
-//                   shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(10)
-//                   ),
-//                 ),
-//               ),
-//               prediction!=''?Text('Prediction : $prediction'):Text('')
-//             ],
-//           ),),
-//           // child: SizedBox(
-//           //     height: 50,
-//           //     width: 300,
-//           //     child: ElevatedButton(
-//           //       child: Text('Pick File'),
-//           //       style: ElevatedButton.styleFrom(
-//           //           backgroundColor: Colors.green,
-//           //           shape: RoundedRectangleBorder(
-//           //               borderRadius: BorderRadius.circular(10)
-//           //           )
-//           //       ), onPressed: pickFile,
-//           //     ),
-//           // ),
-//         )
-//     );
-//   }
-// }
-// import 'dart:html';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-class LoggedIn extends StatefulWidget {
-  const LoggedIn({Key? key}) : super(key: key);
+import 'next.dart';
+class LoggedInHeart extends StatefulWidget {
+  const LoggedInHeart({Key? key}) : super(key: key);
 
   @override
-  State<LoggedIn> createState() => _LoggedInState();
+  State<LoggedInHeart> createState() => _LoggedInHeartState();
 }
 
-class _LoggedInState extends State<LoggedIn> {
+class _LoggedInHeartState extends State<LoggedInHeart> {
   final player=AudioPlayer();
   final player1=AudioPlayer();
   bool isPlaying=false;
@@ -125,6 +21,8 @@ class _LoggedInState extends State<LoggedIn> {
   Duration duration1=Duration.zero;
   Duration position1=Duration.zero;
   int flag=0;
+  // late Future<http.Response> imageFuture;
+  // late Widget plotImage;
 
   String? _filePath;
   String? predicted;
@@ -175,20 +73,20 @@ class _LoggedInState extends State<LoggedIn> {
   }
 
   Future<void> uploadAudio(File audioFile) async {
-    //final url = 'http://10.0.2.2:5000/predict'; // Change this to your Flask back-end URL
-    // final url = 'http://127.0.0.1:5000/predict'; // Change this to your Flask back-end URL
-    final url = 'http://13.51.168.22:80/predict';
+    //final url = 'http://10.0.2.2:5000/process_audio'; // Change this to your Flask back-end URL
+    //final url = 'http://127.0.0.1:5000/process_audio'; // Change this to your Flask back-end URL
+    final url = 'http://13.51.168.22:80/process_audio';
     var request = await http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(
-        await http.MultipartFile.fromPath('audio', audioFile.path));
+        await http.MultipartFile.fromPath('audio_file', audioFile.path));
     var response = await request.send();
     var responseData = await response.stream.bytesToString();
     setState(() {
       prediction = responseData;
     });
+    // debugPrint(responseData);
     print(responseData);
   }
-
   Future<void> pickWavFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.any,
@@ -207,7 +105,7 @@ class _LoggedInState extends State<LoggedIn> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor:Colors.lightGreen,
-        title: Text('Urban Sound Classifier'),
+        title: Text('Heart Disease Predictor'),
       ),
       body: Center(
         child:SingleChildScrollView(
@@ -220,10 +118,13 @@ class _LoggedInState extends State<LoggedIn> {
               Align(alignment: Alignment.topCenter,
                   child: FractionalTranslation(
                       translation: Offset(0, -0.5),
-                      child:Image.asset('assets/usound.jpg',width:75,height: 75))),
+                      child:Image.asset('assets/heart1.jpg',width:75,height: 75))),
+              // SizedBox(
+              //   height: 5,
+              // ),
               ElevatedButton(
                 onPressed: pickWavFile,
-                child: Text('Select audio file',), style:ElevatedButton.styleFrom(
+                child: Text('Input Audio File', style:TextStyle(color:Colors.white),), style:ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,),
               ),
               SizedBox(
@@ -269,6 +170,7 @@ class _LoggedInState extends State<LoggedIn> {
               ),
               ElevatedButton(onPressed: () async {
                 await uploadAudio(File(_filePath ?? ""));
+                flag=1;
 
               }, child: Text('Predict'),style:ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,),),
@@ -276,6 +178,7 @@ class _LoggedInState extends State<LoggedIn> {
               SizedBox(
                 height: 20,
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -286,6 +189,7 @@ class _LoggedInState extends State<LoggedIn> {
                   ],
                 ),
               ),
+
               CircleAvatar(
                 backgroundColor: Colors.lightGreen,
                 foregroundColor: Colors.white,
@@ -301,9 +205,9 @@ class _LoggedInState extends State<LoggedIn> {
                 ),
               ),
               TextButton(onPressed:(){},
-                  child: const Text("Play Output Audio", style: TextStyle(color: Colors.black),)),
+                  child: const Text("Play Reference Audio", style: TextStyle(color: Colors.black),)),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               TextButton(style: TextButton.styleFrom(backgroundColor: Colors.green),
                   onPressed:(){
@@ -323,5 +227,4 @@ class _LoggedInState extends State<LoggedIn> {
       ),
     );
   }
-
 }

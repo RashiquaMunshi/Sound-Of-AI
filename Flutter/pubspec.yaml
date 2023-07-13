@@ -1,4 +1,4 @@
-name: heartdisease_pred
+name: project_2
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -31,17 +31,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  pinput: ^2.2.31
-  firebase_auth: ^4.4.0
   firebase_core: ^2.9.0
-  file_picker: ^5.2.7
+  firebase_auth: ^4.4.0
   get: ^4.6.5
-
+  pinput: ^2.2.31
+  file_picker: ^5.2.7
+  #  audioplayers: 1.1.0
   audioplayers: 4.0.1
-
 
 dev_dependencies:
   flutter_test:

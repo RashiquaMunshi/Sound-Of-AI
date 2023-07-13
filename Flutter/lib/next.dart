@@ -25,10 +25,10 @@ class _NextState extends State<Next> {
   }
 
   Future<http.Response> fetchImage(){
-    return http.get(Uri.parse('http://16.171.145.225:80/plot'));
+    return http.get(Uri.parse('http://13.51.168.22:80/plot'));
   }
   Future<http.Response> fetchSpec(){
-    return http.get(Uri.parse('http://16.171.145.225:80/specplot'));
+    return http.get(Uri.parse('http://13.51.168.22:80/specplot'));
   }
 
   @override
@@ -53,9 +53,9 @@ class _NextState extends State<Next> {
               SizedBox(
                 height: 5,
               ),
-          SizedBox(
-            height: 20,
-          ),
+              SizedBox(
+                height: 20,
+              ),
               Text("Plot of the Input Audio", style: TextStyle(
                 fontSize: 20,
                 fontWeight:FontWeight.bold,
@@ -63,30 +63,30 @@ class _NextState extends State<Next> {
               SizedBox(
                 height: 20,
               ),
-                  Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.2,
-                    child: Scaffold(
-                      body: Center(
-                        child: FutureBuilder<http.Response>(
-                          future: imageFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done &&
-                                snapshot.hasData &&
-                                snapshot.data!.statusCode == 200) {
-                              return Image.memory(snapshot.data!.bodyBytes);
-                            } else if (snapshot.hasError) {
-                              return Text('Failed to load images');
-                            }
-                            return plotImage;
-                          },
-                        ),
-                      ),
+              Container(
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.2,
+                child: Scaffold(
+                  body: Center(
+                    child: FutureBuilder<http.Response>(
+                      future: imageFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.done &&
+                            snapshot.hasData &&
+                            snapshot.data!.statusCode == 200) {
+                          return Image.memory(snapshot.data!.bodyBytes);
+                        } else if (snapshot.hasError) {
+                          return Text('Failed to load images');
+                        }
+                        return plotImage;
+                      },
                     ),
                   ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -120,9 +120,10 @@ class _NextState extends State<Next> {
                   ),
                 ),
               )
-          ],),),
+            ],),),
       ),
     );
   }
 
 }
+// TODO Implement this library.
